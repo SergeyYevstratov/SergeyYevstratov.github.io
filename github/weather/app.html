@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+        .content{
+            width: 90vw;
+            height: 80vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content div{
+            width: 40vw;
+            height: 50vh;
+            border: 2px solid black;
+        }
+
+        button{
+            height: 50px;
+            width: 20vw;
+            margin-top: 10px;
+   
+        }
+    </style>
+
+   
+</head>
+<body>
+    <div id="app">
+        <h1> {{title}}</h1>
+
+        <form v-on:submit.prevent>
+            <input type="text" v-model="query">
+            <input type="submit" @click.prevent="search()" value="Add"> <span id="message">{{ message }}</span>
+        </form><br>
+
+        <table border="1" cellpadding="3" cellspacing="1">
+            <tr>
+                <th>Название</th>
+                <th>Координаты</th>
+                <th>Кельвины</th>
+                <th>Цельсии</th>
+                <th>Влажность</th>
+            </tr>
+            <tr v-for="city in cities">
+                <td>{{ city.name }}</td>
+                <td>{{ city.coord.lat }} {{ city.coord.lon }}</td>
+                <td>{{ city.main.temp }}</td>
+                <td>{{ (city.main.temp-273.15).toFixed() }}</td>
+                <td>{{ city.main.humidity }}%</td>
+            </tr>
+        </table>
+
+        <p>Cities in the database: <b>{{ all.length }}</b></p>
+    
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
